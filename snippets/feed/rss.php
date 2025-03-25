@@ -1,6 +1,6 @@
 <?php
 echo '<?xml version="1.0" encoding="utf-8"?>';
-?><rss version="2.0">
+?><rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title><?= \Kirby\Toolkit\Xml::encode($title) ?></title>
     <link><?= \Kirby\Toolkit\Xml::encode($link) ?></link>
@@ -13,6 +13,9 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
       <title><?= \Kirby\Toolkit\Xml::encode($item->{$titlefield}()) ?></title>
       <link><?= \Kirby\Toolkit\Xml::encode($item->{$urlfield}()) ?></link>
       <guid><?= \Kirby\Toolkit\Xml::encode($item->url()) ?></guid>
+      <?php if ($item->{$feedimage}()->isNotEmpty()): ?>
+        <media:content url="<?= $item->{$feedimage}()->toFile()->url() ?>" medium="image" />
+      <?php endif; ?>
       <pubDate><?= $datefield === 'modified' ? $item->modified('r', 'date') : date('r', $item->{$datefield}()->toTimestamp()) ?></pubDate>
       <description><![CDATA[<?= $item->{$textfield}()->kirbytext() ?>]]></description>
     </item>

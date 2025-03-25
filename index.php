@@ -51,6 +51,7 @@ Kirby::plugin('bnomei/feed', [
                 'snippet' => 'feed/rss',
                 'mime' => null,
                 'sort' => true,
+                'feedimage' => null,
                 // sitemap
                 'dateformat' => 'r', // rss => r, sitemap => c
                 'xsl' => true,
