@@ -14,9 +14,9 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
       <link><?= \Kirby\Toolkit\Xml::encode($item->{$urlfield}()) ?></link>
       <guid><?= \Kirby\Toolkit\Xml::encode($item->url()) ?></guid>
       <?php if ($item->{$feedimage}()->isNotEmpty()): ?>
-        <media:content url="<?= $item->{$feedimage}()->toFile()->url() ?>" medium="image" />
+        <media:content url="<?= $item->{$feedimage}()->toFile()->crop(450, 337)->url() ?>" medium="image" />
       <?php endif; ?>
-      <pubDate><?= $datefield === 'modified' ? $item->modified('r', 'date') : date('r', $item->{$datefield}()->toTimestamp()) ?></pubDate>
+      <pubDate><?= $datefield === 'modified' ? $item->modified('d.m.Y', 'date') : date('d.m.Y', $item->{$datefield}()->toTimestamp()) ?></pubDate>
       <description><![CDATA[<?= $item->{$textfield}()->kirbytext() ?>]]></description>
     </item>
     <?php } ?>
